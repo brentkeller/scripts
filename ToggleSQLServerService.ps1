@@ -1,5 +1,5 @@
 param([switch] $NoWait)
-$srvName = "SQL Server (SQL2017)"
+$srvName = "SQL Server (SQL2019)"
 # PowerShell cmdlet to check a service's status
 $servicePrior = Get-Service $srvName
 $srvName + " is " + $servicePrior.status	

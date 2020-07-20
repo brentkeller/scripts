@@ -1,5 +1,5 @@
 param([switch] $NoWait)
-$srvName = "SQL Server (SQL2017)"
+$srvName = "SQL Server (SQL2019)"
 "Stopping " + $srvName
 Stop-Service $srvName
 # PowerShell cmdlet to check a service's status
