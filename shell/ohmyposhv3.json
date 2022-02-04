@@ -29,9 +29,9 @@
           ],
           "powerline_symbol": "\ue0b0",
           "properties": {
-            "charged_icon": "\ue22f ",
-            "charging_icon": "\ue234 ",
-            "discharging_icon": "\ue231 ",
+            "charged_icon": "\ue22f",
+            "charging_icon": "\ue234",
+            "discharging_icon": "\ue231",
             "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}\uf295"
           },
           "style": "plain",
@@ -39,11 +39,10 @@
         },
         {
           "foreground": "#6CA35E",
-          "powerline_symbol": "\ue0b0",
           "properties": {
             "display_mode": "always",
             "fetch_package_manager": true,
-            "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} "
+            "template": " \ue718{{.Full}}{{if .PackageManagerIcon}}{{.PackageManagerIcon}}{{end}}"
           },
           "style": "plain",
           "type": "node"
