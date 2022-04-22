@@ -4,25 +4,11 @@
 # `. "c:\dev\scripts\shell\PowerShellProfile.ps1"`
 # Save then `. $PROFILE`
 
-
-# Print current version of node.js
-function Get-NodeVer { 
-	try {
-		$ver = node -v
-		#Write-Output ''node:$ver
-		Write-Output ''$ver
-	}
-	catch {}
-}
-
 # Add pretty icons
 Import-Module -Name Terminal-Icons
 
 # Add posh-git
 Import-Module 'C:\dev\resources\posh-git\src\posh-git.psd1'
-#Import-Module posh-git
-# $GitPromptSettings.DefaultPromptPrefix.Text = '$(Get-Date -f "H:mm:ss")$(Get-NodeVer) '
-# $GitPromptSettings.DefaultPromptPrefix.ForegroundColor = 'Orange'
 
 # Add oh-my-posh
 $env:POSH_GIT_ENABLED = $true
