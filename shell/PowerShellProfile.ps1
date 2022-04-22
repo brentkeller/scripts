@@ -20,6 +20,17 @@ oh-my-posh --init --shell pwsh --config "c:\dev\scripts\shell\ohmyposhv3.json" |
 Invoke-Expression -Command $(gh completion -s powershell | Out-String)
 
 
+# git helpers
+
+# git: Checkout main branch
+function gitCheckoutMain { git checkout main }
+Set-Alias gitmain gitCheckoutMain
+
+# git: Checkout previous branch
+function gitCheckoutLastBranch { git checkout - }
+Set-Alias gitlast gitCheckoutLastBranch
+
+
 # Start azurite storage emulator
 function Start-Azurite { c:\dev\scripts\StartAzurite.ps1 -NoWait }
 Set-Alias azemu Start-Azurite
