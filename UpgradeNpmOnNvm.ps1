@@ -5,7 +5,11 @@
 
 $starting_path = Get-Location
 $node_version = node -v
-$node_path = "$env:appdata\nvm\$node_version"
+# For Nvm 4 Windows installed normally
+# $node_path = "$env:appdata\nvm\$node_version"
+# For Nvm 4 Windows installed via Scoop
+$node_path = "$env:userprofile\scoop\apps\nvm\current\nodejs\$node_version"
+
 Write-Host "node_version: $node_version"
 Write-Host "Path used: $node_path"
 cd $node_path
