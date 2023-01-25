@@ -69,6 +69,13 @@ Set-Alias togglesql Toggle-Sql-NoWait
 function Go-To-Shortcut { c:\dev\scripts\goto.ps1 $args }
 Set-Alias go Go-To-Shortcut
 
+# Restore bkc-apps to local MongoDB
+function restoreBkcAppsMongo() {
+  $backupPath = "C:\data\mongo\backups\bkc-apps-prod-backup\bkc-apps-prod"
+  mongorestore -d bkc-apps $backupPath
+}
+Set-Alias restoremybkc restoreBkcAppsMongo
+
 # Add support for .nvmrc file in project folder: https://gist.github.com/danpetitt/e87dabb707079e1bfaf797d0f5f798f2
 function callnvm() {
   # Always use argument version if there is one
