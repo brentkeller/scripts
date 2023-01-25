@@ -16,6 +16,9 @@ $env:POSH_GIT_ENABLED = $true
 oh-my-posh --init --shell pwsh --config "c:\dev\scripts\shell\ohmyposhv3.json" | Invoke-Expression
 
 
+# Add 1password completions
+op completion powershell | Out-String | Invoke-Expression
+
 # Add gh completions
 Invoke-Expression -Command $(gh completion -s powershell | Out-String)
 
