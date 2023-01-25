@@ -34,6 +34,23 @@ function gitCheckoutLastBranch { git checkout - }
 Set-Alias gitlast gitCheckoutLastBranch
 
 
+# open commit hash in devresults repo
+function Open-Github-Commit { 
+  $user = Read-Host -Prompt "Github user/org [DevResults]"
+  if ([string]::IsNullOrWhiteSpace($user))
+  {
+    $user = "DevResults"
+  }
+  $repo = Read-Host -Prompt "Github repo [DevResults]"
+  if ([string]::IsNullOrWhiteSpace($repo))
+  {
+    $repo = "DevResults"
+  }
+  $id = Read-Host -Prompt "Commit hash"
+  Start-Process -Path "https://github.com/$user/$repo/commit/$id"
+}
+Set-Alias ghcommit Open-Github-Commit
+
 # Start azurite storage emulator
 function Start-Azurite { c:\dev\scripts\StartAzurite.ps1 -NoWait }
 Set-Alias azemu Start-Azurite
