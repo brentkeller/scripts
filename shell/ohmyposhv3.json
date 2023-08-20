@@ -87,7 +87,7 @@
           },
           "style": "plain",
           "template": "\ue23a>",
-          "type": "exit"
+          "type": "status"
         }
       ],
       "type": "prompt"
