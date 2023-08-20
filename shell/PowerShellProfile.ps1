@@ -106,3 +106,8 @@ function callnvm() {
   }
 }
 Set-Alias nvmu -value "callnvm"
+
+function Update-Nvmrc { C:\dev\scripts\Update-Nvmrc.ps1 }
+function Use-Nvmrc { C:\dev\scripts\Use-Nvmrc.ps1 }
+
+
