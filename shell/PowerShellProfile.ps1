@@ -29,6 +29,10 @@ Invoke-Expression -Command $(gh completion -s powershell | Out-String)
 function gitCheckoutMain { git checkout main }
 Set-Alias gitmain gitCheckoutMain
 
+# git: Checkout main branch and pull
+function gitCheckoutMainAndPull { git checkout main && git pull}
+Set-Alias gitmainp gitCheckoutMainAndPull
+
 # git: Checkout previous branch
 function gitCheckoutLastBranch { git checkout - }
 Set-Alias gitlast gitCheckoutLastBranch
