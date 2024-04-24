@@ -117,8 +117,8 @@ function Use-Nvmrc { C:\dev\scripts\Use-Nvmrc.ps1 }
 # scoop helpers
 
 function Update-Scoop { scoop update && scoop status }
-Set-Alias sup Update-Scoop
+Set-Alias ss Update-Scoop
 
-function Get-ScoopStatus { scoop status }
-Set-Alias ss Get-ScoopStatus
+function Update-AllScoopApps { scoop update * }
+Set-Alias sup Update-AllScoopApps
 
