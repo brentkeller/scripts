@@ -32,7 +32,7 @@
             "discharging_icon": "\ue231"
           },
           "style": "plain",
-          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}\uf295",
+          "template": " {{ if not .Error }}{{ .Icon }} {{ .Percentage }}{{ end }}{{ .Error }}\uf295",
           "type": "battery"
         },
         {
@@ -42,7 +42,7 @@
             "fetch_package_manager": true
           },
           "style": "plain",
-          "template": " \ue718{{.Full}}{{if .Mismatch}} <#FFFFFF,#FF0000><b>!{{.Expected}}!</b></> {{end}}{{if .PackageManagerIcon}}{{.PackageManagerIcon}}{{end}}",
+          "template": " \ue718 {{.Full}}{{if .Mismatch}} <#FFFFFF,#FF0000><b>!{{.Expected}}!</b></> {{end}}{{if .PackageManagerIcon}} {{.PackageManagerIcon}}{{end}}",
           "type": "node"
         },
         {
