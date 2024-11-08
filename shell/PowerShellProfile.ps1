@@ -22,6 +22,8 @@ op completion powershell | Out-String | Invoke-Expression
 # Add gh completions
 Invoke-Expression -Command $(gh completion -s powershell | Out-String)
 
+# Add gh copilot aliases
+Import-Module 'C:\dev\scripts\GithubCopilotAliases.ps1'
 
 # git helpers
 
