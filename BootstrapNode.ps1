@@ -6,10 +6,6 @@ npm i -g yarn
 Write-Host "Installing serve"
 npm i -g serve
 
-Write-Host "Installing azurite"
-npm i -g azurite
-
-
 # Link CLI apps
 
 Write-Host "Linking devresults-cli"
