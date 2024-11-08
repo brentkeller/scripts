@@ -13,7 +13,7 @@ Import-Module 'C:\dev\resources\posh-git\src\posh-git.psd1'
 # Add oh-my-posh
 $env:POSH_GIT_ENABLED = $true
 # Import-Module 'oh-my-posh' # Not needed with scoop install
-oh-my-posh --init --shell pwsh --config "c:\dev\scripts\shell\ohmyposhv3.json" | Invoke-Expression
+oh-my-posh init pwsh --config "c:\dev\scripts\shell\ohmyposhv3.json" | Invoke-Expression
 
 
 # Add 1password completions
