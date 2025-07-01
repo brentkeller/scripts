@@ -35,6 +35,10 @@ Set-Alias gitmain gitCheckoutMain
 function gitCheckoutMainAndPull { git checkout main && git pull}
 Set-Alias gitmainp gitCheckoutMainAndPull
 
+# git: Checkout main branch, pull, and run npm ci
+function gitCheckoutMainAndPullAndNpmCI { git checkout main && git pull && npm ci}
+Set-Alias gitmainpn gitCheckoutMainAndPullAndNpmCI
+
 # git: Checkout previous branch
 function gitCheckoutLastBranch { git checkout - }
 Set-Alias gitlast gitCheckoutLastBranch
@@ -118,9 +122,19 @@ function Use-Nvmrc { C:\dev\scripts\Use-Nvmrc.ps1 }
 
 # scoop helpers
 
+function Set-GitCredManager { C:\dev\scripts\SetGitCredentialHelper.ps1 }
+function Update-ScoopGit { scoop update git && Set-GitCredManager }
+
 function Update-Scoop { scoop update && scoop status }
 Set-Alias ss Update-Scoop
 
 function Update-AllScoopApps { scoop update * }
 Set-Alias sup Update-AllScoopApps
+
+# winget helpers
+
+function Show-WingetUpgrades { winget list --upgrade-available }
+Set-Alias wingets Show-WingetUpgrades
+
+function Update-OhMyPosh { winget upgrade --id JanDeDobbeleer.OhMyPosh --silent }
 
