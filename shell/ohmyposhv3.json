@@ -2,30 +2,25 @@
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "blocks": [
     {
+      "type": "prompt",
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#26C6DA",
           "style": "plain",
           "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
+          "foreground": "#26C6DA",
           "type": "os"
         },
         {
-          "foreground": "#F57C00",
           "properties": {
             "time_format": "15:04:05"
           },
           "style": "plain",
           "template": "{{ .CurrentDate | date .Format }}",
+          "foreground": "#F57C00",
           "type": "time"
         },
         {
-          "foreground_templates": [
-            "{{ if eq \"Full\" .State.String }}#4caf50{{ end }}",
-            "{{ if eq \"Charging\" .State.String }}#40c4ff{{ end }}",
-            "{{ if eq \"Discharging\" .State.String }}#ff5722{{ end }}"
-          ],
-          "powerline_symbol": "\ue0b0",
           "properties": {
             "charged_icon": "\ue22f",
             "charging_icon": "\ue234",
@@ -33,28 +28,41 @@
           },
           "style": "plain",
           "template": " {{ if not .Error }}{{ .Icon }} {{ .Percentage }}{{ end }}{{ .Error }}\uf295",
-          "type": "battery"
+          "powerline_symbol": "\ue0b0",
+          "type": "battery",
+          "foreground_templates": [
+            "{{ if eq \"Full\" .State.String }}#4caf50{{ end }}",
+            "{{ if eq \"Charging\" .State.String }}#40c4ff{{ end }}",
+            "{{ if eq \"Discharging\" .State.String }}#ff5722{{ end }}"
+          ]
         },
         {
-          "foreground": "#6CA35E",
           "properties": {
             "display_mode": "always",
             "fetch_package_manager": true
           },
           "style": "plain",
-          "template": " \ue718 {{.Full}}{{if .Mismatch}} <#FFFFFF,#FF0000><b>!{{.Expected}}!</b></> {{end}}{{if .PackageManagerIcon}} {{.PackageManagerIcon}}{{end}}",
+          "template": " \ue718 {{.Full}}{{if .Mismatch}} <#FFFFFF,#FF0000><b>!{{.Expected}}!</b></> {{end}}{{if .PackageManagerIcon}} {{.PackageManagerIcon}}{{end}}{{.Error}}",
+          "foreground": "#6CA35E",
           "type": "node"
         },
         {
-          "foreground": "#ffffff",
           "properties": {
             "style": "full"
           },
           "style": "plain",
           "template": " {{ .Path }} ",
+          "foreground": "#ffffff",
           "type": "path"
         },
         {
+          "properties": {
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "style": "plain",
+          "template": "[{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}] ",
+          "type": "git",
           "foreground_templates": [
             "{{ if and (eq .Ahead 0) (eq .Behind 0) (.Upstream) }}#6AE3FA{{ end }}",
             "{{ if (.Staging.Changed) }}#39a459{{ end }}",
@@ -62,37 +70,29 @@
             "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFEB3B{{ end }}",
             "{{ if gt .Ahead 0 }}#13db21{{ end }}",
             "{{ if gt .Behind 0 }}#FF8040{{ end }}"
-          ],
-          "properties": {
-            "fetch_status": true,
-            "fetch_upstream_icon": true
-          },
-          "style": "plain",
-          "template": "[{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}] ",
-          "type": "git"
+          ]
         },
         {
-          "foreground": "#ffff66",
-          "powerline_symbol": "\ue0b0",
           "style": "plain",
           "template": "\uf0e7 ",
+          "foreground": "#ffff66",
+          "powerline_symbol": "\ue0b0",
           "type": "root"
         },
         {
-          "foreground_templates": [
-            "{{ if gt .Code 0 }}#f1184c{{ end }}"
-          ],
           "properties": {
             "always_enabled": true
           },
           "style": "plain",
           "template": "\ue23a>",
-          "type": "status"
+          "type": "status",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#f1184c{{ end }}"
+          ]
         }
-      ],
-      "type": "prompt"
+      ]
     }
   ],
-  "final_space": true,
-  "version": 2
+  "version": 3,
+  "final_space": true
 }
