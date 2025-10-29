@@ -1,5 +1,8 @@
 # Writes a .nvmrc file with the current node version
 
+# Add this line to your PowerShell profile to enable the command:
+# function Update-Nvmrc { C:\dev\scripts\Update-Nvmrc.ps1 }
+
 # Check for .nvmrc file in current directory, if not then exit
 $version = node -v
 

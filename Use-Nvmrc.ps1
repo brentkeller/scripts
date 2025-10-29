@@ -1,5 +1,8 @@
 # Tells nvm to use the version of node in the .nvmrc file for this directory
 
+# Add this line to your PowerShell profile to enable the command:
+# function Use-Nvmrc { C:\dev\scripts\Use-Nvmrc.ps1 }
+
 # Check for .nvmrc file in current directory, if not then exit
 $hasNvmrc = Test-Path -Path ".\.nvmrc" -PathType Leaf
 if ($false -eq $hasNvmrc) {
