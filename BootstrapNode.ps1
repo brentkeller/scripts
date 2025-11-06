@@ -3,8 +3,8 @@
 Write-Host "Installing yarn"
 npm i -g yarn
 
-Write-Host "Installing serve"
-npm i -g serve
+# Write-Host "Installing serve"
+# npm i -g serve
 
 # Link CLI apps
 
