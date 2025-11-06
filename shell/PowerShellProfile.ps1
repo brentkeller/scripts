@@ -4,6 +4,9 @@
 # `. "c:\dev\scripts\shell\PowerShellProfile.ps1"`
 # Save then `. $PROFILE`
 
+# activate mise
+mise activate pwsh | Out-String | Invoke-Expression
+
 # Add pretty icons
 Import-Module -Name Terminal-Icons
 
