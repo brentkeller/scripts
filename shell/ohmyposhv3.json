@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "pwd": "osc99",
   "blocks": [
@@ -13,7 +13,7 @@
           "type": "os"
         },
         {
-          "properties": {
+          "options": {
             "time_format": "15:04:05"
           },
           "style": "plain",
@@ -22,7 +22,7 @@
           "type": "time"
         },
         {
-          "properties": {
+          "options": {
             "charged_icon": "\ue22f",
             "charging_icon": "\ue234",
             "discharging_icon": "\ue231"
@@ -38,7 +38,7 @@
           ]
         },
         {
-          "properties": {
+          "options": {
             "display_mode": "always",
             "fetch_package_manager": true
           },
@@ -48,7 +48,7 @@
           "type": "node"
         },
         {
-          "properties": {
+          "options": {
             "style": "full"
           },
           "style": "plain",
@@ -57,7 +57,7 @@
           "type": "path"
         },
         {
-          "properties": {
+          "options": {
             "fetch_status": true,
             "fetch_upstream_icon": true
           },
@@ -81,15 +81,13 @@
           "type": "root"
         },
         {
-          "properties": {
+          "options": {
             "always_enabled": true
           },
           "style": "plain",
           "template": "\ue23a>",
           "type": "status",
-          "foreground_templates": [
-            "{{ if gt .Code 0 }}#f1184c{{ end }}"
-          ]
+          "foreground_templates": ["{{ if gt .Code 0 }}#f1184c{{ end }}"]
         }
       ]
     }
