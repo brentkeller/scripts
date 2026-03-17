@@ -89,6 +89,18 @@ function restoreBkcAppsMongo() {
 }
 Set-Alias restoremybkc restoreBkcAppsMongo
 
+# Open DevResults.sln in Visual Studio 2026 (18)
+function Open-DevResults {
+  $slnDir = if (Test-Path "package.json") { ".." } else { "." }
+  $sln = Join-Path $slnDir "DevResults.sln"
+  if (Test-Path $sln) {
+    Start-Process "C:\Program Files\Microsoft Visual Studio\18\Professional\Common7\IDE\devenv.exe" (Resolve-Path $sln)
+  } else {
+    Write-Error "DevResults.sln not found in $((Resolve-Path $slnDir).Path)"
+  }
+}
+Set-Alias drvs Open-DevResults
+
 # NVM helpers
 function Update-Nvmrc { C:\dev\scripts\Update-Nvmrc.ps1 }
 function Use-Nvmrc { C:\dev\scripts\Use-Nvmrc.ps1 }
