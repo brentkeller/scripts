@@ -67,14 +67,7 @@ Set-Alias ghcommit Open-Github-Commit
 
 # GO (requires bkcli installed or linked (npm link))
 function Go-To-Shortcut { c:\dev\scripts\goto.ps1 $args }
-Set-Alias go Go-To-Shortcut
-
-# Restore bkc-apps to local MongoDB
-function restoreBkcAppsMongo() {
-  $backupPath = "C:\data\mongo\backups\bkc-apps-prod-backup\bkc-apps-prod"
-  mongorestore -d bkc-apps $backupPath
-}
-Set-Alias restoremybkc restoreBkcAppsMongo
+Set-Alias goto Go-To-Shortcut
 
 # Open DevResults.sln in Visual Studio 2026 (18)
 function Open-DevResults {
