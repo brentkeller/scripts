@@ -64,19 +64,6 @@ function Open-Github-Commit {
 }
 Set-Alias ghcommit Open-Github-Commit
 
-# Start azurite storage emulator
-function Start-Azurite { c:\dev\scripts\StartAzurite.ps1 -NoWait }
-Set-Alias azemu Start-Azurite
-
-# SQL Server Management (requires admin shell)
-function Start-Sql-NoWait { c:\dev\scripts\StartSql.ps1 -NoWait }
-Set-Alias startsql Start-Sql-NoWait
-
-function Stop-Sql-NoWait { c:\dev\scripts\StopSql.ps1 -NoWait }
-Set-Alias stopsql Stop-Sql-NoWait
-
-function Toggle-Sql-NoWait { c:\dev\scripts\ToggleSQLServerService.ps1 -NoWait }
-Set-Alias togglesql Toggle-Sql-NoWait
 
 # GO (requires bkcli installed or linked (npm link))
 function Go-To-Shortcut { c:\dev\scripts\goto.ps1 $args }
