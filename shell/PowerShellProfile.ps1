@@ -64,6 +64,8 @@ function Open-Github-Commit {
 }
 Set-Alias ghcommit Open-Github-Commit
 
+function Backup-Sql { c:\dev\scripts\sql\Backup-DockerDb.ps1 }
+function Restore-Sql { c:\dev\scripts\sql\Restore-DockerDb.ps1 }
 
 # GO (requires bkcli installed or linked (npm link))
 function Go-To-Shortcut { c:\dev\scripts\goto.ps1 $args }
