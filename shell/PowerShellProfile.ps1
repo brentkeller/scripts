@@ -73,7 +73,7 @@ Set-Alias goto Go-To-Shortcut
 
 # Open DevResults.sln in Visual Studio 2026 (18)
 function Open-DevResults {
-  $slnDir = if (Test-Path "package.json") { ".." } else { "." }
+  $slnDir = if (Test-Path "DevResults.vbproj") { ".." } else { "." }
   $sln = Join-Path $slnDir "DevResults.sln"
   if (Test-Path $sln) {
     Start-Process "C:\Program Files\Microsoft Visual Studio\18\Professional\Common7\IDE\devenv.exe" (Resolve-Path $sln)
