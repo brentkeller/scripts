@@ -1,0 +1,63 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "black": "#262B44",
+    "blue": "#4B95E9",
+    "green": "#59C9A5",
+    "orange": "#F07623",
+    "red": "#D81E5B",
+    "sapling": "#a6d189",
+    "white": "#E0DEF4",
+    "yellow": "#F3AE35"
+  },
+  "accent_color": "32",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "options": {
+            "style": "full"
+          },
+          "template": "{{ if .Segments.Git.Dir }}  {{ .Segments.Git.RepoName }}{{ if .Segments.Git.IsWorkTree }} {{ end }}{{ $rel :=  .Segments.Git.RelativeDir }}{{ if $rel }}  {{ .Format $rel }}{{ end }}{{ else }}  {{ path .Path .Location }}{{ end }} ",
+          "foreground": "p:white",
+          "leading_diamond": "",
+          "background": "p:orange",
+          "type": "path",
+          "style": "diamond"
+        },
+        {
+          "options": {
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "leading_diamond": "<background,parentBackground></>",
+          "template": " {{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }} ",
+          "foreground": "p:white",
+          "background": "p:blue",
+          "type": "git",
+          "style": "diamond",
+          "background_templates": [
+            "{{ if (.Working.Changed) }}p:red{{ end }}",
+            "{{ if (.Staging.Changed) }}p:green{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:yellow{{ end }}",
+            "{{ if gt .Ahead 0 }}p:green{{ end }}",
+            "{{ if gt .Behind 0 }}p:orange{{ end }}"
+          ]
+        },
+        {
+          "leading_diamond": "<background,parentBackground></>",
+          "trailing_diamond": "",
+          "template": " 󰯉 {{ .Model.DisplayName }}{{ with .Effort }}{{ if .Level }} - {{ .Level }}{{ end }}{{ end }} | {{ .FormattedTokens }} | {{ .TokenUsagePercent }}% | 5h:{{ .FiveHourUsage }}% ",
+          "foreground": "p:white",
+          "background": "accent",
+          "type": "claude",
+          "style": "diamond"
+        }
+      ]
+    }
+  ],
+  "version": 4,
+  "final_space": true
+}
