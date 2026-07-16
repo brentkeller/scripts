@@ -97,7 +97,10 @@ WITH FILE = 1,
 ALTER DATABASE [$Database] SET MULTI_USER;
 ALTER DATABASE [$Database] SET RECOVERY SIMPLE WITH NO_WAIT;
 $compatSql
+GO
 
+-- Separate batch: USE resolves the database at compile time, so it must run
+-- after the RESTORE batch has actually created the database.
 USE [$Database];
 DBCC SHRINKFILE (N'$logLogical', 0, TRUNCATEONLY);
 "@
