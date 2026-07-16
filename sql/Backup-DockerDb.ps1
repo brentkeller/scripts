@@ -16,6 +16,7 @@
 
 .EXAMPLE
   ./Backup-DockerDb.ps1 -Database dev-export -BakName custom.bak
+  ./Backup-DockerDb.ps1 -Database dev-export -ShrinkLogFirst -KeepInternalCopy
 #>
 
 [CmdletBinding()]
@@ -50,6 +51,12 @@ if (-not (Test-Path $HostBackupDir)) {
 # Ensure the staging dir exists on the named volume (writable by the mssql user).
 docker exec -u root $Container mkdir -p $StagingDir | Out-Null
 docker exec -u root $Container chown mssql:root $StagingDir | Out-Null
+
+if (-not $SaPassword) { $SaPassword = $env:SA_PASSWORD }
+if (-not $SaPassword) {
+    $sec = Read-Host -AsSecureString "SA password for $Container"
+    $SaPassword = [System.Net.NetworkCredential]::new('', $sec).Password
+}
 
 $invoke = Join-Path $PSScriptRoot 'Invoke-DockerSql.ps1'
 
