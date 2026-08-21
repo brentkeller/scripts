@@ -3,9 +3,28 @@
 # `notepad $PROFILE`
 # `. "c:\dev\scripts\shell\PowerShellProfile.ps1"`
 # Save then `. $PROFILE`
+function Test-ProfileTool {
+  param([string]$ToolName)
+  if ($null -eq (Get-Command $ToolName -ErrorAction SilentlyContinue)) {
+    Write-Warning "Profile: '$ToolName' was not found on PATH. Skipping related setup."
+    return $false
+  }
+  return $true
+}
 
 # activate mise
-mise activate pwsh | Out-String | Invoke-Expression
+if (Test-ProfileTool "mise") {
+  try {
+    $miseActivation = mise activate pwsh | Out-String
+    if ([string]::IsNullOrWhiteSpace($miseActivation)) {
+      Write-Warning "Profile: 'mise' returned an empty activation script. Skipping setup."
+    } else {
+      Invoke-Expression $miseActivation
+    }
+  } catch {
+    Write-Warning "Profile: failed to initialize 'mise'. $($_.Exception.Message)"
+  }
+}
 
 # Add pretty icons
 Import-Module -Name Terminal-Icons
@@ -20,10 +39,32 @@ oh-my-posh init pwsh --config "c:\dev\scripts\shell\ohmyposhv3.json" | Invoke-Ex
 
 
 # Add 1password completions
-op completion powershell | Out-String | Invoke-Expression
+if (Test-ProfileTool "op") {
+  try {
+    $opCompletion = op completion powershell | Out-String
+    if ([string]::IsNullOrWhiteSpace($opCompletion)) {
+      Write-Warning "Profile: 'op' returned empty completion output. Skipping setup."
+    } else {
+      Invoke-Expression $opCompletion
+    }
+  } catch {
+    Write-Warning "Profile: failed to initialize 'op' completions. $($_.Exception.Message)"
+  }
+}
 
 # Add gh completions
-Invoke-Expression -Command $(gh completion -s powershell | Out-String)
+if (Test-ProfileTool "gh") {
+  try {
+    $ghCompletion = gh completion -s powershell | Out-String
+    if ([string]::IsNullOrWhiteSpace($ghCompletion)) {
+      Write-Warning "Profile: 'gh' returned empty completion output. Skipping setup."
+    } else {
+      Invoke-Expression -Command $ghCompletion
+    }
+  } catch {
+    Write-Warning "Profile: failed to initialize 'gh' completions. $($_.Exception.Message)"
+  }
+}
 
 # Add gh copilot aliases
 Import-Module 'C:\dev\scripts\GithubCopilotAliases.ps1'
