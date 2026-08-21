@@ -79,10 +79,6 @@ Set-Alias gitmain gitCheckoutMain
 function gitCheckoutMainAndPull { git checkout main && git pull}
 Set-Alias gitmainp gitCheckoutMainAndPull
 
-# git: Checkout main branch, pull, and run npm ci
-function gitCheckoutMainAndPullAndNpmCI { git checkout main && git pull && npm ci}
-Set-Alias gitmainpn gitCheckoutMainAndPullAndNpmCI
-
 # git: Checkout previous branch
 function gitCheckoutLastBranch { git checkout - }
 Set-Alias gitlast gitCheckoutLastBranch
@@ -142,4 +138,9 @@ function Show-WingetUpgrades { winget list --upgrade-available }
 Set-Alias wingets Show-WingetUpgrades
 
 function Update-OhMyPosh { winget upgrade --id JanDeDobbeleer.OhMyPosh --silent }
+
+# tool shortcuts
+
+function Open-WaidUi { waid ui }
+Set-Alias wu Open-WaidUi
 
