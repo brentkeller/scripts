@@ -84,10 +84,6 @@ function Open-DevResults {
 }
 Set-Alias drvs Open-DevResults
 
-# NVM helpers
-function Update-Nvmrc { C:\dev\scripts\Update-Nvmrc.ps1 }
-function Use-Nvmrc { C:\dev\scripts\Use-Nvmrc.ps1 }
-
 # scoop helpers
 
 function Set-GitCredManager { C:\dev\scripts\SetGitCredentialHelper.ps1 }
