@@ -66,6 +66,20 @@ if (Test-ProfileTool "gh") {
   }
 }
 
+# Add herdr completions
+if (Test-ProfileTool "herdr") {
+  try {
+    $herdrCompletion = herdr completion powershell | Out-String
+    if ([string]::IsNullOrWhiteSpace($herdrCompletion)) {
+      Write-Warning "Profile: 'herdr' returned empty completion output. Skipping setup."
+    } else {
+      Invoke-Expression -Command $herdrCompletion
+    }
+  } catch {
+    Write-Warning "Profile: failed to initialize 'herdr' completions. $($_.Exception.Message)"
+  }
+}
+
 # Add gh copilot aliases
 Import-Module 'C:\dev\scripts\GithubCopilotAliases.ps1'
 
