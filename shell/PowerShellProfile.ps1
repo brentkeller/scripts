@@ -135,6 +135,9 @@ function Open-DevResults {
 }
 Set-Alias drvs Open-DevResults
 
+# Sync and archive the .reviews folders between DevResults worktrees
+function Sync-DevRevs { c:\dev\scripts\Sync-DevResults-Reviews.ps1 @args }
+
 # scoop helpers
 
 function Set-GitCredManager { C:\dev\scripts\SetGitCredentialHelper.ps1 }
