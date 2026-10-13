@@ -1,0 +1,87 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "pwd": "osc99",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "os",
+          "style": "plain",
+          "foreground": "#26C6DA",
+          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} "
+        },
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "#F57C00",
+          "options": { "time_format": "15:04:05" },
+          "template": "{{ .CurrentDate | date .Format }}"
+        },
+        {
+          "type": "battery",
+          "style": "plain",
+          "foreground_templates": [
+            "{{ if eq \"Full\" .State.String }}#4caf50{{ end }}",
+            "{{ if eq \"Charging\" .State.String }}#40c4ff{{ end }}",
+            "{{ if eq \"Discharging\" .State.String }}#ff5722{{ end }}",
+            "{{ if eq \"Not Charging\" .State.String }}#ffb300{{ end }}"
+          ],
+          "options": {
+            "charged_icon": "\ue22f",
+            "charging_icon": "\ue234",
+            "discharging_icon": "\ue231",
+            "not_charging_icon": "\uf1e6"
+          },
+          "template": " {{ if not .Error }}{{ .Icon }} {{ .Percentage }}{{ end }}{{ .Error }}\uf295"
+        },
+        {
+          "type": "node",
+          "style": "plain",
+          "foreground": "#6CA35E",
+          "options": {
+            "display_mode": "always",
+            "fetch_package_manager": true
+          },
+          "template": " \ue718 {{.Full}}{{if .Mismatch}} <#FFFFFF,#FF0000><b>!{{.Expected}}!</b></> {{end}}{{if .PackageManagerIcon}} {{.PackageManagerIcon}}{{end}}{{.Error}}"
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "#ffffff",
+          "options": { "style": "full" },
+          "template": " {{ .Path }} "
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground_templates": [
+            "{{ if and (eq .Ahead 0) (eq .Behind 0) (.Upstream) }}#6AE3FA{{ end }}",
+            "{{ if (.Staging.Changed) }}#39a459{{ end }}",
+            "{{ if (.Working.Changed) }}#cc0000{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFEB3B{{ end }}",
+            "{{ if gt .Ahead 0 }}#13db21{{ end }}",
+            "{{ if gt .Behind 0 }}#FF8040{{ end }}"
+          ],
+          "template": "[{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}] "
+        },
+        {
+          "type": "root",
+          "style": "plain",
+          "foreground": "#ffff66",
+          "template": "\uf0e7 "
+        },
+        {
+          "type": "status",
+          "style": "plain",
+          "foreground_templates": ["{{ if gt .Code 0 }}#f1184c{{ end }}"],
+          "options": { "always_enabled": true },
+          "template": "\ue23a>"
+        }
+      ]
+    }
+  ]
+}
