@@ -27,10 +27,25 @@ if (Test-ProfileTool "mise") {
 }
 
 # Add pretty icons
-Import-Module -Name Terminal-Icons
+# Terminal-Icons rewrites its theme XML files on every import, so shells starting
+# at the same time can read a half-written file. Retry once after a short delay.
+try {
+  Import-Module -Name Terminal-Icons -ErrorAction Stop
+} catch {
+  Start-Sleep -Milliseconds 250
+  try {
+    Import-Module -Name Terminal-Icons -Force -ErrorAction Stop
+  } catch {
+    Write-Warning "Profile: failed to load Terminal-Icons. $($_.Exception.Message)"
+  }
+}
 
 # Add posh-git
-Import-Module 'C:\dev\resources\posh-git\src\posh-git.psd1'
+if (Get-Module -ListAvailable -Name posh-git) {
+  Import-Module posh-git
+} else {
+  Write-Warning "Profile: 'posh-git' module not found. Install with: Install-Module posh-git -Scope CurrentUser"
+}
 
 # Add oh-my-posh
 $env:POSH_GIT_ENABLED = $true
