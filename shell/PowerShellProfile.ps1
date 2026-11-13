@@ -28,11 +28,18 @@ if (Test-ProfileTool "mise") {
 
 # Add pretty icons
 # Terminal-Icons rewrites its theme XML files on every import, so shells starting
-# at the same time can read a half-written file. Retry once after a short delay.
+# at the same time can read a half-written file or leave one permanently corrupt.
+# On failure, delete any theme file that no longer parses (the module regenerates
+# its built-in themes on import) and retry once.
 try {
   Import-Module -Name Terminal-Icons -ErrorAction Stop
 } catch {
   Start-Sleep -Milliseconds 250
+  $themeDir = Join-Path $env:APPDATA 'powershell\Community\Terminal-Icons'
+  foreach ($themeFile in Get-ChildItem $themeDir -Filter '*.xml' -ErrorAction SilentlyContinue) {
+    try { $null = Import-Clixml -Path $themeFile.FullName -ErrorAction Stop }
+    catch { Remove-Item $themeFile.FullName -Force -ErrorAction SilentlyContinue }
+  }
   try {
     Import-Module -Name Terminal-Icons -Force -ErrorAction Stop
   } catch {
