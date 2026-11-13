@@ -10,11 +10,15 @@
 .EXAMPLE
   # Pick the newest bak matching a prefix
   ./Restore-DockerDb.ps1 -Database dev-export -Latest
+
+.EXAMPLE
+  # No args: choose a .bak from a numbered list, then confirm the database name
+  ./Restore-DockerDb.ps1
 #>
 
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory)] [string] $Database,
+    [string] $Database,
     [string] $BakName,
     [switch] $Latest,
     [string] $Container        = 'sql2025',
@@ -27,8 +31,41 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
+if (-not (Test-Path $HostBackupDir)) {
+    throw "Host backup dir not found: $HostBackupDir"
+}
+
+if ($Latest -and -not $Database) {
+    $Database = Read-Host 'Database name'
+    if (-not $Database) { throw 'No database name given' }
+}
+
 if (-not $BakName -and -not $Latest) {
-    throw "Specify -BakName <file.bak> or -Latest"
+    $filter = if ($Database) { "$Database-*.bak" } else { '*.bak' }
+    $baks = @(Get-ChildItem -Path $HostBackupDir -Filter $filter |
+        Sort-Object LastWriteTime -Descending)
+    if (-not $baks) { throw "No $filter files in $HostBackupDir" }
+
+    Write-Host "Backups in ${HostBackupDir}:"
+    for ($i = 0; $i -lt $baks.Count; $i++) {
+        $b = $baks[$i]
+        Write-Host ('  [{0,2}] {1}  ({2:yyyy-MM-dd HH:mm}, {3:N1} MB)' -f
+            ($i + 1), $b.Name, $b.LastWriteTime, ($b.Length / 1MB))
+    }
+    $choice = Read-Host "Select backup [1-$($baks.Count)] (Enter = 1)"
+    if (-not $choice) { $choice = '1' }
+    $n = 0
+    if (-not [int]::TryParse($choice, [ref]$n) -or $n -lt 1 -or $n -gt $baks.Count) {
+        throw "Invalid selection: $choice"
+    }
+    $BakName = $baks[$n - 1].Name
+}
+
+if (-not $Database) {
+    # Default to the bak name minus the '-yyyy.MM.dd-<suffix>.bak' (or '-yyyyMMdd-...') tail.
+    $suggested = $BakName -replace '-\d{4}\.?\d{2}\.?\d{2}.*$', '' -replace '\.bak$', ''
+    $answer = Read-Host "Restore as database [$suggested]"
+    $Database = if ($answer) { $answer } else { $suggested }
 }
 
 if ($Latest) {
